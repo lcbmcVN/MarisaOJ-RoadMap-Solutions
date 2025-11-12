@@ -1,0 +1,40 @@
+import sys
+from bisect import insort_left
+def IO(name):
+    if name:
+        sys.stdin = open(name+'.inp', 'r')
+        sys.stdout = open(name + '.out','w')
+
+IO('')
+
+input = lambda: sys.stdin.readline().strip()
+
+class Sol:
+    def __init__(self, n, k):
+        self.n = n
+        self.k = k
+        self.ans = []
+        self.backtrack(1,[])
+
+        for r in self.ans:
+            print(*r)
+    
+    def backtrack(self, idx,  cur):
+        if len(cur) == self.k:
+            self.ans.append(cur)
+            return
+
+        for i in range(idx, self.n+1):
+            self.backtrack(i+1, cur + [i])
+
+def solve():
+    n,k = map(int, input().split())
+    Sol(n,k)
+
+def main():
+    t = 1
+    for _ in range(t):
+        solve()
+
+if __name__ == '__main__':
+    main()
